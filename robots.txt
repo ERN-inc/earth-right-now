@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ern-inc.github.io/earth-right-now/sitemap.xml
