@@ -13,8 +13,8 @@ SITE = ROOT / "index.html"
 STATUS = ROOT / "live.json"
 SITEMAP = ROOT / "sitemap.xml"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
-SCRIPT_RE = re.compile(r'(<script type="application/ld\\+json">)(.*?)(</script>)', re.S)
-VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\\Z")
+SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
+VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
 
 
 def main():
