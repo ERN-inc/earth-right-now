@@ -3,11 +3,27 @@ import json
 import re
 import subprocess
 import sys
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 CHANNEL_LIVE = 'https://www.youtube.com/@earth_right_now/live'
 OUTPUT = Path(__file__).resolve().parents[1] / 'live.json'
+
+
+def fallback_live_page():
+    """Use public channel page only when it explicitly says live now."""
+    req = urllib.request.Request(CHANNEL_LIVE, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req, timeout=20) as response:
+            html = response.read(3000000).decode('utf-8', errors='replace')
+    except OSError as exc:
+        print(f'Fallback unavailable: {exc}', file=sys.stderr)
+        return None
+    if not re.search(r'"isLiveNow"\s*:\s*true', html):
+        return None
+    ids = re.findall(r'"videoId"\s*:\s*"([A-Za-z0-9_-]{11})"', html)
+    return {'live_status': 'is_live', 'id': ids[0]} if ids else None
 
 
 def main():
@@ -16,16 +32,19 @@ def main():
     try:
         result = subprocess.run(command, capture_output=True, text=True, timeout=100)
     except (subprocess.TimeoutExpired, OSError) as exc:
-        print(f'Lookup failed; retaining previous status: {exc}', file=sys.stderr)
-        return 1
-    if result.returncode != 0:
-        error = result.stderr.lower()
+        print(f'Primary lookup failed: {exc}', file=sys.stderr)
+        result = None
+    if result is None or result.returncode != 0:
+        error = result.stderr.lower() if result is not None else ''
         if 'the channel is not currently live' in error:
             info = {'live_status': 'not_live'}
             print('Channel is offline; recording offline status')
         else:
-            print('Lookup failed; retaining previous status: ' + result.stderr[-1200:], file=sys.stderr)
-            return 1
+            print('Primary lookup blocked; trying public channel page', file=sys.stderr)
+            info = fallback_live_page()
+            if info is None:
+                print('Unverified state; retaining previous status')
+                return 0
     else:
         try:
             info = json.loads(result.stdout)
