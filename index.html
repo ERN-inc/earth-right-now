@@ -46,15 +46,21 @@ const iframe=document.getElementById('earth-video');
 const youtubeLink=document.getElementById('youtube-link');
 const visitLink=document.getElementById('visit-live-link');
 const channelUrl='https://www.youtube.com/@earth_right_now/live';
+let activeId=defaultId;
 function setVideo(id){
   const url='https://www.youtube.com/watch?v='+id;
-  iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0';
+  if(activeId!==id){
+    iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0';
+    activeId=id;
+  }
   youtubeLink.href=url;
   visitLink.href=url;
 }
 function setOffline(){
-  iframe.removeAttribute('src');
-  iframe.src='about:blank';
+  if(activeId!==null){
+    iframe.src='about:blank';
+    activeId=null;
+  }
   youtubeLink.href=channelUrl;
   visitLink.href=channelUrl;
 }
@@ -72,6 +78,7 @@ async function refreshLive(){
   }catch(error){console.warn('Could not refresh ERN live status:',error);}
 }
 refreshLive();
+setInterval(refreshLive, 60000);
 document.getElementById('fullscreen').addEventListener('click',()=>{
   const el=document.getElementById('player');
   if(el.requestFullscreen)el.requestFullscreen();
