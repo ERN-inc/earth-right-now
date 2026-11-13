@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'scripts/check_live.py'
+      - 'scripts/update_seo.py'
       - '.github/workflows/update-live.yml'
   schedule:
     - cron: '*/10 * * * *'
@@ -30,11 +31,13 @@ jobs:
         run: python -m pip install --disable-pip-version-check 'yt-dlp>=2025.1.1'
       - name: Detect current live stream
         run: python scripts/check_live.py
-      - name: Commit status only if changed
+      - name: Synchronize Google video metadata and sitemap
+        run: python scripts/update_seo.py
+      - name: Commit status and SEO only if changed
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add live.json
+          git add live.json index.html sitemap.xml
           if ! git diff --cached --quiet; then
             git commit -m 'Update ERN live stream status'
             git push
