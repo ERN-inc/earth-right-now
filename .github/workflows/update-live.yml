@@ -2,6 +2,10 @@
 name: ERN live stream detector
 
 on:
+  push:
+    paths:
+      - 'scripts/check_live.py'
+      - '.github/workflows/update-live.yml'
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
