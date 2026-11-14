@@ -8,7 +8,7 @@ on:
       - 'scripts/update_seo.py'
       - '.github/workflows/update-live.yml'
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/20 * * * *'
   workflow_dispatch:
 
 permissions:
