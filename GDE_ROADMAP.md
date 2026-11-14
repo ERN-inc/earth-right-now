@@ -12,7 +12,7 @@ Goal: Build a zero-extra-cost, policy-compliant, fully automated global distribu
 - Preserve the existing ERN website visual design unless a change is required for distribution functionality.
 - Keep all automation auditable in GitHub.
 
-## Phase 1 — Distribution foundation (2026-11-14 to 2026-11-20)
+## Phase 1 — Distribution foundation (2026-11-14 to 2026-11-17)
 - Keep live YouTube ID detection and SEO metadata synchronized.
 - Keep sitemap variants and RSS feed synchronized.
 - Maintain embeddable live player.
@@ -25,7 +25,7 @@ Exit criteria:
 - Latest GitHub Actions run succeeds.
 - Public endpoints are reachable.
 
-## Phase 2 — Shareability & referral loop (2026-11-21 to 2026-11-27)
+## Phase 2 — Shareability & referral loop (2026-11-18 to 2026-11-20)
 - Strengthen share metadata and canonical links.
 - Add non-intrusive copy/share/embed helpers without redesigning the site.
 - Add UTM-compatible sharing links while preserving canonical URL.
@@ -37,7 +37,7 @@ Exit criteria:
 - Share previews use the current live stream.
 - No paid service is required.
 
-## Phase 3 — Multilingual discovery (2026-11-28 to 2026-12-11)
+## Phase 3 — Multilingual discovery (2026-11-21 to 2026-11-27)
 - Add SEO-safe multilingual landing content or language endpoints for major world languages.
 - Start with English, Japanese, Spanish, Portuguese, French, German, Indonesian, Hindi, Arabic, Korean, Chinese.
 - Use hreflang/canonical rules correctly.
@@ -48,7 +48,7 @@ Exit criteria:
 - Major-language discovery pages are indexable and automatically maintained.
 - Sitemap and metadata remain valid.
 
-## Phase 4 — City discovery network (2026-12-12 to 2026-12-31)
+## Phase 4 — City discovery network (2026-11-28 to 2026-12-07)
 - Build indexable city-discovery pages or data-driven routes for ERN cities without changing the desktop app.
 - Prioritize high-population and globally searched cities first.
 - Each page must have useful unique context, not keyword stuffing.
@@ -58,7 +58,7 @@ Exit criteria:
 - First city cohort is publicly reachable, internally linked, and in sitemap.
 - Generation/update process is automated.
 
-## Phase 5 — External distribution surfaces (2027-01-01 to 2027-01-21)
+## Phase 5 — External distribution surfaces (2026-12-08 to 2026-12-17)
 - Prepare standards-compliant feeds and embed assets for blogs, schools, hotels, media sites, dashboards and directories.
 - Create reusable embed snippets and attribution text.
 - Surface Product Hunt, GitHub and YouTube consistently.
@@ -68,7 +68,7 @@ Exit criteria:
 - External publishers can embed ERN with one snippet.
 - Distribution assets remain synchronized automatically.
 
-## Phase 6 — Organic social content pipeline (2027-01-22 to 2027-02-15)
+## Phase 6 — Organic social content pipeline (2026-12-18 to 2026-12-30)
 - Generate reusable text/caption packages from verified ERN events.
 - Prepare per-platform variants for YouTube, X, Instagram, Threads, TikTok, Facebook, Reddit where policy-compliant.
 - Automate posting only through officially connected/approved APIs.
@@ -78,7 +78,7 @@ Exit criteria:
 - Content packages are generated automatically.
 - Connected platforms can publish through approved integrations.
 
-## Phase 7 — Measurement & optimization (2027-02-16 onward)
+## Phase 7 — Measurement & optimization (2026-12-31 onward)
 - Track public traffic, referral sources, search visibility, embed usage and content performance using available zero-cost analytics.
 - Prioritize channels that generate real human visits.
 - Retire low-value automation.
@@ -89,7 +89,7 @@ Each daily automation run must:
 1. Read this roadmap and current repository state.
 2. Determine the current phase by date and incomplete exit criteria.
 3. Inspect latest GitHub Actions and public distribution files.
-4. Execute the next safe, reversible, zero-cost task that does not require new user credentials or consent.
+4. Execute as many safe, reversible, zero-cost tasks as can be completed and verified in the run without requiring new user credentials or consent; do not artificially limit the run to one task.
 5. Verify the change.
 6. Report exactly what changed, what was verified, and what remains.
 7. If blocked by a credential/permission/manual platform action, report the smallest required user action instead of guessing.
