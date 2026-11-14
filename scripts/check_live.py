@@ -47,8 +47,9 @@ def official_api_lookup():
     for item in data.get('items', []):
         video_id = item.get('id', {}).get('videoId')
         if re.fullmatch(r'[A-Za-z0-9_-]{11}', str(video_id)):
+            published_at = item.get('snippet', {}).get('publishedAt')
             print(f'YouTube API: live detected, videoId={video_id}')
-            return {'live_status':'is_live','id':video_id}
+            return {'live_status':'is_live','id':video_id,'upload_date':published_at}
     print('YouTube API: no live video returned; verifying before reporting offline')
     return None
 
@@ -92,6 +93,9 @@ def write_status(info):
     video_id = info.get('id')
     if status == 'is_live' and re.fullmatch(r'[A-Za-z0-9_-]{11}', str(video_id)):
         payload = {'status': 'live', 'videoId': video_id}
+        upload_date = info.get('upload_date')
+        if isinstance(upload_date, str) and upload_date:
+            payload['uploadDate'] = upload_date
     elif status in ('not_live', 'was_live', 'post_live', 'is_upcoming'):
         payload = {'status': 'offline', 'videoId': None}
     else:
