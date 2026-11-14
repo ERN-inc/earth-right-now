@@ -1,0 +1,36 @@
+name: ERN GDE health check
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'index.html'
+      - 'embed.html'
+      - 'feed.xml'
+      - 'live.json'
+      - 'sitemap.xml'
+      - 'sitemap-ern.xml'
+      - '.github/workflows/gde-health.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check public ERN endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://ern-inc.github.io/earth-right-now'
+          for path in '/' '/embed.html' '/feed.xml' '/live.json' '/sitemap.xml' '/sitemap-ern.xml'; do
+            url="$base$path"
+            echo "Checking $url"
+            curl --fail --silent --show-error --location --max-time 20 "$url" >/tmp/ern-check
+            test -s /tmp/ern-check
+          done
+          echo 'All ERN public endpoints returned non-empty 2xx responses.'
