@@ -36,7 +36,7 @@ def main():
     if page.get("@type") != "WebPage":
         raise ValueError("Unexpected structured data; refusing to overwrite")
 
-    # Do not invent uploadDate: a YouTube video date must be verified independently.
+    upload_date = status.get("uploadDate")
     if status["status"] == "live":
         page["mainEntity"] = {
             "@type": "VideoObject",
@@ -47,6 +47,8 @@ def main():
             "url": f"https://www.youtube.com/watch?v={video_id}",
             "isLiveBroadcast": True,
         }
+        if isinstance(upload_date, str) and upload_date:
+            page["mainEntity"]["uploadDate"] = upload_date
     else:
         page.pop("mainEntity", None)
 
