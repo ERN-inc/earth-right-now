@@ -5,5 +5,12 @@
     <link>https://ern-inc.github.io/earth-right-now/</link>
     <description>Live Earth visualization, sunrise, sunset and city moments.</description>
     <language>en</language>
+    <item>
+      <title>EARTH RIGHT NOW — Live Earth 24/7</title>
+      <link>https://www.youtube.com/watch?v=BmgRaSxWcpU</link>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=BmgRaSxWcpU</guid>
+      <pubDate>Sat, 14 Nov 2026 00:42:07 GMT</pubDate>
+      <description>Live Earth visualization with sunrise, sunset and city moments across 286 cities.</description>
+    </item>
   </channel>
 </rss>
