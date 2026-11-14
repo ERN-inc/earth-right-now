@@ -1,0 +1,9 @@
+{
+  "name": "EARTH RIGHT NOW",
+  "site": "https://ern-inc.github.io/earth-right-now/",
+  "embed": "https://ern-inc.github.io/earth-right-now/embed.html",
+  "feed": "https://ern-inc.github.io/earth-right-now/feed.xml",
+  "liveStatus": "https://ern-inc.github.io/earth-right-now/live.json",
+  "sitemap": "https://ern-inc.github.io/earth-right-now/sitemap.xml",
+  "youtube": "https://www.youtube.com/@earth_right_now/live"
+}
