@@ -11,7 +11,8 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "index.html"
 STATUS = ROOT / "live.json"
-SITEMAP = ROOT / "sitemap.xml"
+SITEMAPS = [ROOT / "sitemap.xml", ROOT / "sitemap-ern.xml"]
+TEXT_SITEMAP = ROOT / "sitemap.txt"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
 SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
 VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
@@ -62,17 +63,19 @@ def main():
     # lastmod reflects actual page content changes, not every detector poll.
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", ns)
-    tree = ET.parse(SITEMAP)
-    url = next((node for node in tree.getroot().findall(f"{{{ns}}}url")
-                if node.findtext(f"{{{ns}}}loc") == PAGE_URL), None)
-    if url is None:
-        raise ValueError("Homepage not present in sitemap")
-    lastmod = url.find(f"{{{ns}}}lastmod")
-    if lastmod is None:
-        lastmod = ET.SubElement(url, f"{{{ns}}}lastmod")
-    lastmod.text = datetime.now(timezone.utc).date().isoformat()
-    tree.write(SITEMAP, encoding="utf-8", xml_declaration=True)
-    print("Updated structured data and sitemap lastmod")
+    for sitemap in SITEMAPS:
+        tree = ET.parse(sitemap)
+        url = next((node for node in tree.getroot().findall(f"{{{ns}}}url")
+                    if node.findtext(f"{{{ns}}}loc") == PAGE_URL), None)
+        if url is None:
+            raise ValueError(f"Homepage not present in {sitemap.name}")
+        lastmod = url.find(f"{{{ns}}}lastmod")
+        if lastmod is None:
+            lastmod = ET.SubElement(url, f"{{{ns}}}lastmod")
+        lastmod.text = datetime.now(timezone.utc).date().isoformat()
+        tree.write(sitemap, encoding="utf-8", xml_declaration=True)
+    TEXT_SITEMAP.write_text(PAGE_URL + "\n", encoding="utf-8")
+    print("Updated structured data and all sitemap endpoints")
     return 0
 
 
