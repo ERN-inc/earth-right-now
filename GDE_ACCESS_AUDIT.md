@@ -120,3 +120,14 @@ Do not call traffic-growth work successful based on deployment alone. Success re
 ## Current conclusion
 
 The main issue is not that the site is blocked from crawling. The larger issue is that ERN currently has too little searchable/distributable surface area to create sustained organic growth. The next highest-leverage work is to multiply useful entry points (languages + cities) while preserving technical quality and measuring whether those entry points actually produce human traffic.
+
+
+## 2026-11-15 daily verification — new root-cause finding
+
+**Confirmed code defect (P0):** The live SEO synchronization script used doubled backslashes inside Python raw regex patterns. These patterns could not match the actual `<script type="application/ld+json">` tag and YouTube metadata URLs correctly. The code also wrote a literal backslash-n to `sitemap.txt`, instead of a newline. This is a concrete explanation for why metadata drift could persist even though the GitHub Actions workflow was configured to run periodically.
+
+**Changes committed:** Corrected regex escaping and substitution callbacks in `scripts/update_seo.py`; added isolated live/offline/idempotence regression tests; configured the scheduled live workflow to run the tests before detector/SEO writes.
+
+**Verification boundary:** GitHub content writes succeeded. GitHub Actions run conclusion and public GitHub Pages HTTP status could not be independently verified in this run. No claim of successful production deploy or traffic lift is made.
+
+**Next checks:** Confirm the Actions test step passes; confirm public `live.json`, VideoObject, OG/Twitter previews, no-JS iframe, RSS and all sitemap variants are synchronized after the next successful run. Compare GA4 acquisition reports and Search Console impressions to distinguish indexing, discovery, click-through and retention bottlenecks. Do not infer actual traffic numbers without access to those reports.
