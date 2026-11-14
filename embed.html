@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EARTH RIGHT NOW — Live Embed</title>
+<style>html,body{margin:0;width:100%;height:100%;background:#000;overflow:hidden}iframe{width:100%;height:100%;border:0}</style>
+</head>
+<body>
+<iframe id="ern-live" title="EARTH RIGHT NOW live stream" allow="autoplay; encrypted-media; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+<script>
+(async()=>{
+  const frame=document.getElementById('ern-live');
+  const channel='https://www.youtube.com/@earth_right_now/live';
+  try{
+    const r=await fetch('./live.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('status');
+    const d=await r.json();
+    if(d.status==='live'&&/^[A-Za-z0-9_-]{11}$/.test(String(d.videoId||''))){
+      frame.src='https://www.youtube.com/embed/'+d.videoId+'?autoplay=1&mute=1&playsinline=1&rel=0';
+    }else{
+      location.replace(channel);
+    }
+  }catch(e){
+    location.replace(channel);
+  }
+})();
+</script>
+</body>
+</html>
