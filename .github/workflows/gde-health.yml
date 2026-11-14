@@ -34,3 +34,24 @@ jobs:
             test -s /tmp/ern-check
           done
           echo 'All ERN public endpoints returned non-empty 2xx responses.'
+      - name: Check live metadata consistency
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://ern-inc.github.io/earth-right-now'
+          curl --fail --silent --show-error --location "$base/live.json" -o /tmp/live.json
+          curl --fail --silent --show-error --location "$base/" -o /tmp/index.html
+          curl --fail --silent --show-error --location "$base/feed.xml" -o /tmp/feed.xml
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          live=json.loads(Path('/tmp/live.json').read_text())
+          if live.get('status')=='live':
+              vid=live.get('videoId','')
+              assert len(vid)==11, 'invalid live video id'
+              html=Path('/tmp/index.html').read_text()
+              feed=Path('/tmp/feed.xml').read_text()
+              assert vid in html, 'homepage contains stale live video reference'
+              assert vid in feed, 'RSS feed contains stale live video reference'
+          print('Live metadata is consistent across live.json, homepage and feed.')
+          PY
