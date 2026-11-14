@@ -49,8 +49,8 @@ def official_api_lookup():
         if re.fullmatch(r'[A-Za-z0-9_-]{11}', str(video_id)):
             print(f'YouTube API: live detected, videoId={video_id}')
             return {'live_status':'is_live','id':video_id}
-    print('YouTube API: no live video returned; reporting offline')
-    return {'live_status':'not_live'}
+    print('YouTube API: no live video returned; verifying before reporting offline')
+    return None
 
 def main():
     info = official_api_lookup()
