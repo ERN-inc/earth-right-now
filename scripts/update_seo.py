@@ -13,8 +13,8 @@ SITEMAPS = [ROOT / "sitemap.xml", ROOT / "sitemap-ern.xml"]
 TEXT_SITEMAP = ROOT / "sitemap.txt"
 FEED = ROOT / "feed.xml"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
-SCRIPT_RE = re.compile(r'(<script type="application/ld\\+json">)(.*?)(</script>)', re.S)
-VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\\Z")
+SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
+VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
 
 
 def valid_video_id(value):
@@ -76,38 +76,38 @@ def main():
 
         # Keep share previews and no-JS fallbacks synchronized with the live stream.
         html = re.sub(
-            r'(<meta property="og:image" content=")https://i\\.ytimg\\.com/vi/[A-Za-z0-9_-]{11}/maxresdefault\\.jpg(">)',
-            rf'\\1{thumb_max}\\2',
+            r'(<meta property="og:image" content=")https://i\.ytimg\.com/vi/[A-Za-z0-9_-]{11}/maxresdefault\.jpg(">)',
+            lambda m: m.group(1) + thumb_max + m.group(2),
             html,
             count=1,
         )
         html = re.sub(
-            r'(<meta name="twitter:image" content=")https://i\\.ytimg\\.com/vi/[A-Za-z0-9_-]{11}/maxresdefault\\.jpg(">)',
-            rf'\\1{thumb_max}\\2',
+            r'(<meta name="twitter:image" content=")https://i\.ytimg\.com/vi/[A-Za-z0-9_-]{11}/maxresdefault\.jpg(">)',
+            lambda m: m.group(1) + thumb_max + m.group(2),
             html,
             count=1,
         )
         html = re.sub(
             r"(const defaultId=')[A-Za-z0-9_-]{11}(';)",
-            rf"\\1{video_id}\\2",
+            lambda m: m.group(1) + video_id + m.group(2),
             html,
             count=1,
         )
         html = re.sub(
-            r'(id="earth-video"[^>]*src="https://www\\.youtube\\.com/embed/)[A-Za-z0-9_-]{11}',
-            rf'\\1{video_id}',
+            r'(id="earth-video"[^>]*src="https://www\.youtube\.com/embed/)[A-Za-z0-9_-]{11}',
+            lambda m: m.group(1) + video_id,
             html,
             count=1,
         )
         html = re.sub(
-            r'(id="youtube-link" href="https://www\\.youtube\\.com/watch\\?v=)[A-Za-z0-9_-]{11}',
-            rf'\\1{video_id}',
+            r'(id="youtube-link" href="https://www\.youtube\.com/watch\?v=)[A-Za-z0-9_-]{11}',
+            lambda m: m.group(1) + video_id,
             html,
             count=1,
         )
         html = re.sub(
-            r'(id="visit-live-link" href="https://www\\.youtube\\.com/watch\\?v=)[A-Za-z0-9_-]{11}',
-            rf'\\1{video_id}',
+            r'(id="visit-live-link" href="https://www\.youtube\.com/watch\?v=)[A-Za-z0-9_-]{11}',
+            lambda m: m.group(1) + video_id,
             html,
             count=1,
         )
@@ -145,7 +145,7 @@ def main():
             lastmod.text = today
         tree.write(sitemap, encoding="utf-8", xml_declaration=True)
 
-    TEXT_SITEMAP.write_text(PAGE_URL + "\\n", encoding="utf-8")
+    TEXT_SITEMAP.write_text(PAGE_URL + "\n", encoding="utf-8")
 
     if status["status"] == "live":
         watch_url = f"https://www.youtube.com/watch?v={video_id}"
