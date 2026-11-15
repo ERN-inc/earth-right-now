@@ -157,6 +157,24 @@ class DiscoveryIntegrityTest(unittest.TestCase):
                 self.assertIn(f'<link rel="alternate" hreflang="{code}" href="{target}">', html,
                               f"Missing reciprocal {code} in {page}")
 
+    def test_city_hub_links_to_every_indexed_city(self):
+        """New city guides must be discoverable from the city hub, not only XML."""
+        hub = (ROOT / "cities" / "index.html").read_text(encoding="utf-8")
+        class Links(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.hrefs = set()
+            def handle_starttag(self, tag, attrs):
+                if tag == "a":
+                    self.hrefs.update(value for key, value in attrs if key == "href" and value)
+        links = Links()
+        links.feed(hub)
+        for url in DISCOVERY_URLS:
+            relative = url.removeprefix(PAGE_URL)
+            if relative.startswith("cities/") and relative.endswith(".html"):
+                self.assertIn("./" + relative.removeprefix("cities/"), links.hrefs,
+                              f"City guide not linked from hub: {relative}")
+
     def test_homepage_links_to_city_and_language_hubs(self):
         homepage = (ROOT / "index.html").read_text(encoding="utf-8")
         for link in ('href="./cities/"', 'href="./ja/"', 'href="./es/"', 'href="./id/"'):
