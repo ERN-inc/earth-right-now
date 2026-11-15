@@ -12,6 +12,11 @@ Goal: Build a zero-extra-cost, policy-compliant, fully automated global distribu
 - Preserve the existing ERN website visual design unless a change is required for distribution functionality.
 - Keep all automation auditable in GitHub.
 
+## President-approved funnel and change control (2026-11-15)
+**Primary acquisition destination: the ERN official website.** Attract real worldwide visitors to https://ern-inc.github.io/earth-right-now/ first; from the official site, let visitors watch the embedded YouTube live stream or follow the YouTube link. The direction is **external discovery → ERN official website → YouTube viewing**. Do not replace this with a YouTube-first funnel or prioritize YouTube channel traffic as the principal KPI. Keep the existing embedded live player and YouTube link; no desktop-app changes.
+
+**Decision authority:** Before starting a new acquisition channel, changing the audience, launching a campaign or altering the funnel, present the specific action, expected benefit, cost and risks to the President and obtain approval. A general instruction to continue does not authorize strategic redirection. Routine implementation within an explicitly approved scope may proceed, with verifiable reporting. Prioritize real website sessions and Google Search clicks/impressions; commits, tests and deployments are supporting evidence only.
+
 ## Updated audience priority (2026-11-15, President direction)
 ERN is a relaxing, captivating, always-on Earth viewing experience first—not an education product. Prioritize genuine visits from (1) live-stream viewers, (2) ambient/relaxation and work-background audiences, (3) screensaver and visual display searches, (4) travel/city/landscape fans, and (5) hotels, cafes and display publishers. Educational directory outreach and classroom-resource production are paused. Existing accurate explanatory pages may remain for organic discovery, but do not prioritize educational pitching. The previously researched education prospects are archived research only, not an active outreach queue. Optimize actual website referrals and repeat human visits, not commits or speculative impressions.
 
