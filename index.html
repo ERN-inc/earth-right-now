@@ -93,6 +93,7 @@ setInterval(refreshLive, 60000);
 document.getElementById('fullscreen').addEventListener('click',()=>{
   if(typeof gtag==='function')gtag('event','fullscreen_live');
   const el=document.getElementById('player');
+  if(typeof gtag==='function')gtag('event','live_view_intent',{method:'fullscreen'});
   if(el.requestFullscreen)el.requestFullscreen();
   else if(iframe.requestFullscreen)iframe.requestFullscreen();
 });
@@ -107,8 +108,8 @@ async function share(){
 }
 document.getElementById('share').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','share_earth',{method:'web_share_or_copy'});share();});
 document.getElementById('copy-link').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','copy_website_link');share();});
-document.getElementById('youtube-link').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','outbound_youtube',{link_url:youtubeLink.href});});
-document.getElementById('visit-live-link').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','outbound_youtube',{link_url:visitLink.href});});
+document.getElementById('youtube-link').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','outbound_youtube',{link_url:youtubeLink.href});if(typeof gtag==='function')gtag('event','live_view_intent',{method:'youtube_link'});});
+document.getElementById('visit-live-link').addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','outbound_youtube',{link_url:visitLink.href});if(typeof gtag==='function')gtag('event','live_view_intent',{method:'visit_live_link'});});
 })();
 </script>
 </body></html>
