@@ -29,7 +29,7 @@ class DiscoveryIntegrityTest(unittest.TestCase):
             root = ET.parse(ROOT / name).getroot()
             urls = [node.text for node in root.findall("s:url/s:loc", NS)]
             self.assertEqual(len(urls), len(set(urls)), name)
-            self.assertTrue(set(DISCOVERY_URLS).issubset(urls), name)
+            self.assertEqual(set(urls), set(DISCOVERY_URLS), name)
         text_urls = (ROOT / "sitemap.txt").read_text(encoding="utf-8").splitlines()
         self.assertEqual(text_urls, DISCOVERY_URLS)
 
@@ -57,6 +57,8 @@ class DiscoveryIntegrityTest(unittest.TestCase):
                 if parsed.scheme or parsed.netloc or href.startswith("#"):
                     continue
                 target = (page.parent / unquote(parsed.path)).resolve()
+                self.assertTrue(target.is_relative_to(ROOT.resolve()),
+                                f"Internal link escapes site root in {page}: {href}")
                 if target.is_dir():
                     target /= "index.html"
                 self.assertTrue(target.is_file(), f"Broken link in {page}: {href}")
