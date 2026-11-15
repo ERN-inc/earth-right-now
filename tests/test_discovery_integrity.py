@@ -186,6 +186,42 @@ class DiscoveryIntegrityTest(unittest.TestCase):
                 self.assertIn("./" + relative.removeprefix("cities/"), links.hrefs,
                               f"City guide not linked from hub: {relative}")
 
+    def test_robots_sitemaps_are_local_and_declared(self):
+        """Catch accidental crawl blocking or stale sitemap declarations."""
+        robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
+        self.assertIn("User-agent: *", robots)
+        self.assertIn("Allow: /", robots)
+        self.assertNotIn("Disallow: /\n", robots)
+        for filename in ("sitemap.xml", "sitemap-ern.xml", "sitemap.txt"):
+            self.assertIn("Sitemap: " + PAGE_URL + filename, robots)
+            self.assertTrue((ROOT / filename).is_file(), filename)
+
+    def test_homepage_structured_data_is_valid_json(self):
+        """Prevent malformed JSON-LD from silently breaking search metadata."""
+        import json
+        class StructuredData(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.inside = False
+                self.chunks = []
+                self.blocks = []
+            def handle_starttag(self, tag, attrs):
+                if tag == "script" and dict(attrs).get("type") == "application/ld+json":
+                    self.inside = True
+                    self.chunks = []
+            def handle_data(self, data):
+                if self.inside:
+                    self.chunks.append(data)
+            def handle_endtag(self, tag):
+                if tag == "script" and self.inside:
+                    self.blocks.append("".join(self.chunks))
+                    self.inside = False
+        parser = StructuredData()
+        parser.feed((ROOT / "index.html").read_text(encoding="utf-8"))
+        self.assertTrue(parser.blocks, "Homepage is missing JSON-LD")
+        parsed = [json.loads(block) for block in parser.blocks]
+        self.assertTrue(any(item.get("@context") == "https://schema.org" for item in parsed))
+
     def test_homepage_links_to_city_and_language_hubs(self):
         homepage = (ROOT / "index.html").read_text(encoding="utf-8")
         for link in ('href="./cities/"', 'href="./ja/"', 'href="./es/"', 'href="./id/"'):
