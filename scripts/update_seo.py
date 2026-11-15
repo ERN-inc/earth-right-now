@@ -13,6 +13,7 @@ SITEMAPS = [ROOT / "sitemap.xml", ROOT / "sitemap-ern.xml"]
 TEXT_SITEMAP = ROOT / "sitemap.txt"
 FEED = ROOT / "feed.xml"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
+DISCOVERY_URLS = [PAGE_URL, PAGE_URL + "embed-guide.html"]
 SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
 VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
 
@@ -143,9 +144,15 @@ def main():
             lastmod = ET.SubElement(url, f"{{{ns}}}lastmod")
         if html_changed:
             lastmod.text = today
+        # Preserve the homepage while including genuinely useful discovery pages.
+        existing = {node.findtext(f"{{{ns}}}loc") for node in tree.getroot().findall(f"{{{ns}}}url")}
+        for discovery_url in DISCOVERY_URLS:
+            if discovery_url not in existing:
+                node = ET.SubElement(tree.getroot(), f"{{{ns}}}url")
+                ET.SubElement(node, f"{{{ns}}}loc").text = discovery_url
         tree.write(sitemap, encoding="utf-8", xml_declaration=True)
 
-    TEXT_SITEMAP.write_text(PAGE_URL + "\n", encoding="utf-8")
+    TEXT_SITEMAP.write_text("".join(url + "\n" for url in DISCOVERY_URLS), encoding="utf-8")
 
     if status["status"] == "live":
         watch_url = f"https://www.youtube.com/watch?v={video_id}"
