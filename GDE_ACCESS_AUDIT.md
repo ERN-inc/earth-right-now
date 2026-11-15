@@ -4,6 +4,8 @@ Date: 2026-11-14
 Scope: Public acquisition/distribution surfaces for `ERN-inc/earth-right-now`.
 Goal: Identify concrete reasons traffic is not growing and convert findings into measurable, automatable fixes.
 
+> **Current-state correction — 2026-11-15 (verified in GitHub):** The original executive finding and section 1 below are a historical baseline from 2026-11-14, not a description of the current repository. The discovery inventory now contains **22 canonical URLs**: the homepage, embed guide, three translated landing pages (Japanese, Spanish, Indonesian), four topic guides, a city index and **12 city guides**. The city pages cover Tokyo, Jakarta, Singapore, Seoul, Sydney, Mumbai, Cape Town, Reykjavík, Dubai, Buenos Aires, London and New York. Both XML sitemaps and the text sitemap include this inventory; `scripts/update_seo.py` maintains the list. The latest confirmed discovery-quality workflow run for commit `41f4f672` succeeded, and the GitHub Pages deployment for that commit also succeeded. This verifies repository automation and deployment, **not** Google indexing, organic traffic growth, conversion growth or live-video availability. Further priority: measure actual acquisition and click-through, confirm index coverage, and improve useful content and distribution without spam or added cost.
+
 ## Executive finding
 
 The current site is technically crawlable, but its acquisition surface is still extremely small. The main public site is essentially one indexable landing page, with one URL in the sitemap, no multilingual landing pages, no city-specific discovery pages, and only limited external distribution surfaces. That makes meaningful organic search growth unlikely even if the homepage itself is technically healthy.
