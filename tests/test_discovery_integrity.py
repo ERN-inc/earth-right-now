@@ -1,8 +1,9 @@
 """Zero-network checks for the ERN discovery inventory and internal links."""
 import re
+from html.parser import HTMLParser
 import unittest
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 from xml.etree import ElementTree as ET
 
 from scripts.update_seo import DISCOVERY_URLS, PAGE_URL
@@ -32,6 +33,34 @@ class DiscoveryIntegrityTest(unittest.TestCase):
             self.assertTrue(set(DISCOVERY_URLS).issubset(urls), name)
         text_urls = (ROOT / "sitemap.txt").read_text(encoding="utf-8").splitlines()
         self.assertEqual(text_urls, DISCOVERY_URLS)
+
+
+    def test_discovery_internal_links_resolve(self):
+        """Verify internal navigation without network access or JS execution."""
+        class LinkCollector(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.hrefs = []
+
+            def handle_starttag(self, tag, attrs):
+                if tag == "a":
+                    self.hrefs.extend(value for key, value in attrs if key == "href" and value)
+
+        for url in DISCOVERY_URLS:
+            relative = url.removeprefix(PAGE_URL)
+            page = ROOT / relative
+            if not relative or relative.endswith("/"):
+                page /= "index.html"
+            collector = LinkCollector()
+            collector.feed(page.read_text(encoding="utf-8"))
+            for href in collector.hrefs:
+                parsed = urlparse(href)
+                if parsed.scheme or parsed.netloc or href.startswith("#"):
+                    continue
+                target = (page.parent / unquote(parsed.path)).resolve()
+                if target.is_dir():
+                    target /= "index.html"
+                self.assertTrue(target.is_file(), f"Broken link in {page}: {href}")
 
     def test_homepage_links_to_city_and_language_hubs(self):
         homepage = (ROOT / "index.html").read_text(encoding="utf-8")
