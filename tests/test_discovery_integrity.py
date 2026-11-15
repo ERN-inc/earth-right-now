@@ -66,6 +66,40 @@ class DiscoveryIntegrityTest(unittest.TestCase):
 
 
 
+
+    def test_discovery_links_use_accessible_text(self):
+        """Catch empty navigation anchors in the static discovery pages."""
+        class AnchorCollector(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.current = None
+                self.anchors = []
+
+            def handle_starttag(self, tag, attrs):
+                if tag == "a":
+                    self.current = {"attrs": dict(attrs), "text": ""}
+
+            def handle_data(self, data):
+                if self.current is not None:
+                    self.current["text"] += data
+
+            def handle_endtag(self, tag):
+                if tag == "a" and self.current is not None:
+                    self.anchors.append(self.current)
+                    self.current = None
+
+        for url in DISCOVERY_URLS:
+            relative = url.removeprefix(PAGE_URL)
+            page = ROOT / relative
+            if not relative or relative.endswith("/"):
+                page /= "index.html"
+            parser = AnchorCollector()
+            parser.feed(page.read_text(encoding="utf-8"))
+            for anchor in parser.anchors:
+                self.assertTrue(anchor["text"].strip() or anchor["attrs"].get("aria-label") or
+                                anchor["attrs"].get("title"),
+                                f"Link without accessible text in {page}: {anchor['attrs']}")
+
     def test_sitemap_urls_match_canonical_without_trailing_index(self):
         """Avoid splitting search signals between directory and index.html URLs."""
         for url in DISCOVERY_URLS:
