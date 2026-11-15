@@ -45,7 +45,10 @@
       await navigator.clipboard.writeText(snippet);
       status.textContent='Embed code copied.';
     }catch(error){
-      status.textContent='Copy unavailable. Select the code above and copy it manually.';
+      const code=document.querySelector('pre code');
+      const selection=window.getSelection();
+      if(selection){const range=document.createRange();range.selectNodeContents(code);selection.removeAllRanges();selection.addRange(range);}
+      status.textContent='Clipboard access unavailable. The embed code is selected; use Copy from your browser menu.';
     }
   });
 })();
