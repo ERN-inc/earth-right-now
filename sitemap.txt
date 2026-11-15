@@ -16,5 +16,7 @@ https://ern-inc.github.io/earth-right-now/cities/sydney.html
 https://ern-inc.github.io/earth-right-now/cities/mumbai.html
 https://ern-inc.github.io/earth-right-now/cities/cape-town.html
 https://ern-inc.github.io/earth-right-now/cities/reykjavik.html
+https://ern-inc.github.io/earth-right-now/cities/dubai.html
+https://ern-inc.github.io/earth-right-now/cities/buenos-aires.html
 https://ern-inc.github.io/earth-right-now/cities/london.html
 https://ern-inc.github.io/earth-right-now/cities/new-york.html
