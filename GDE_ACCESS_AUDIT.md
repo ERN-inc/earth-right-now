@@ -131,3 +131,11 @@ The main issue is not that the site is blocked from crawling. The larger issue i
 **Verification boundary:** GitHub content writes succeeded. GitHub Actions run conclusion and public GitHub Pages HTTP status could not be independently verified in this run. No claim of successful production deploy or traffic lift is made.
 
 **Next checks:** Confirm the Actions test step passes; confirm public `live.json`, VideoObject, OG/Twitter previews, no-JS iframe, RSS and all sitemap variants are synchronized after the next successful run. Compare GA4 acquisition reports and Search Console impressions to distinguish indexing, discovery, click-through and retention bottlenecks. Do not infer actual traffic numbers without access to those reports.
+
+## 2026-11-15 regression gate repair
+
+**Confirmed blocker:** The scheduled GitHub Actions workflow runs `tests/test_update_seo.py` before synchronizing metadata. The test still asserted that `sitemap.txt` contained only the homepage URL, even though the live SEO script now deliberately writes all discovery URLs. Consequently, the test was guaranteed to fail after discovery expansion and could prevent scheduled live updates.
+
+**Repair:** Updated the regression test to assert the complete `DISCOVERY_URLS` text sitemap and presence of each URL in both XML sitemap variants. Commit `d2e807f457a77ab85dd46057903fe2dfede37515`. The script and test now express the same sitemap contract.
+
+**Verification boundary:** GitHub write succeeded; the remote Actions result and public Pages endpoints remain unverified because public HTTP access was unavailable from this execution environment. Do not claim a passing workflow or public deployment until observed.
