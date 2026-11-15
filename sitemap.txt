@@ -3,3 +3,6 @@ https://ern-inc.github.io/earth-right-now/embed-guide.html
 https://ern-inc.github.io/earth-right-now/ja/
 https://ern-inc.github.io/earth-right-now/es/
 https://ern-inc.github.io/earth-right-now/id/
+https://ern-inc.github.io/earth-right-now/guides/world-sunrise-sunset.html
+https://ern-inc.github.io/earth-right-now/guides/earth-screensaver.html
+https://ern-inc.github.io/earth-right-now/guides/earth-visualization-vs-satellite.html
