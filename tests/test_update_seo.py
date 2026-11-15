@@ -48,6 +48,8 @@ class SeoSyncTest(unittest.TestCase):
                 self.assertNotIn(old, content)
                 self.assertIn(new, content)
                 self.assertIn(new, feed.read_text(encoding="utf-8"))
+                self.assertIn("<link>" + update_seo.PAGE_URL + "</link>", feed.read_text(encoding="utf-8"))
+                self.assertIn("<guid isPermaLink=\"false\">ern-live-" + new + "</guid>", feed.read_text(encoding="utf-8"))
                 self.assertEqual(text_sitemap.read_text(encoding="utf-8"), "".join(url + "\n" for url in update_seo.DISCOVERY_URLS))
                 for sitemap_path in sitemaps:
                     sitemap_content = sitemap_path.read_text(encoding="utf-8")
