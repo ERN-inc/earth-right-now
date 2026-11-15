@@ -160,8 +160,8 @@ def main():
         description = "Live Earth visualization with sunrise, sunset and city moments across 286 cities."
         item = f"""    <item>
       <title>{title}</title>
-      <link>{watch_url}</link>
-      <guid isPermaLink="true">{watch_url}</guid>
+      <link>{PAGE_URL}</link>
+      <guid isPermaLink="false">ern-live-{video_id}</guid>
       <pubDate>{rss_date(upload_date or checked_at)}</pubDate>
       <description>{description}</description>
     </item>"""
