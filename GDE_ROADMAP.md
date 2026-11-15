@@ -12,6 +12,9 @@ Goal: Build a zero-extra-cost, policy-compliant, fully automated global distribu
 - Preserve the existing ERN website visual design unless a change is required for distribution functionality.
 - Keep all automation auditable in GitHub.
 
+## Updated audience priority (2026-11-15, President direction)
+ERN is a relaxing, captivating, always-on Earth viewing experience first—not an education product. Prioritize genuine visits from (1) live-stream viewers, (2) ambient/relaxation and work-background audiences, (3) screensaver and visual display searches, (4) travel/city/landscape fans, and (5) hotels, cafes and display publishers. Educational directory outreach and classroom-resource production are paused. Existing accurate explanatory pages may remain for organic discovery, but do not prioritize educational pitching. The previously researched education prospects are archived research only, not an active outreach queue. Optimize actual website referrals and repeat human visits, not commits or speculative impressions.
+
 ## Phase 1 — Distribution foundation (2026-11-14 to 2026-11-17)
 - Keep live YouTube ID detection and SEO metadata synchronized.
 - Keep sitemap variants and RSS feed synchronized.
