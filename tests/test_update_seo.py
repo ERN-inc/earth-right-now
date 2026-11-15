@@ -53,8 +53,12 @@ class SeoSyncTest(unittest.TestCase):
                     sitemap_content = sitemap_path.read_text(encoding="utf-8")
                     for discovery_url in update_seo.DISCOVERY_URLS:
                         self.assertIn(discovery_url, sitemap_content)
+                sitemap_snapshots = {p: p.read_bytes() for p in sitemaps}
                 self.assertEqual(update_seo.main(), 0)
                 self.assertEqual(content, page.read_text(encoding="utf-8"))
+                for sitemap_path in sitemaps:
+                    self.assertEqual(sitemap_path.read_bytes(), sitemap_snapshots[sitemap_path],
+                                     f"Sitemap changed on an identical repeat sync: {sitemap_path.name}")
                 status.write_text(json.dumps({"status": "offline", "checkedAt": "2026-11-15T00:00:00Z"}),
                                   encoding="utf-8")
                 self.assertEqual(update_seo.main(), 0)
