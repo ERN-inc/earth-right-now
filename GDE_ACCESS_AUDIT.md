@@ -6,6 +6,16 @@ Goal: Identify concrete reasons traffic is not growing and convert findings into
 
 > **Current-state correction — 2026-11-15 (verified in GitHub):** The original executive finding and section 1 below are a historical baseline from 2026-11-14, not a description of the current repository. The discovery inventory now contains **22 canonical URLs**: the homepage, embed guide, three translated landing pages (Japanese, Spanish, Indonesian), four topic guides, a city index and **12 city guides**. The city pages cover Tokyo, Jakarta, Singapore, Seoul, Sydney, Mumbai, Cape Town, Reykjavík, Dubai, Buenos Aires, London and New York. Both XML sitemaps and the text sitemap include this inventory; `scripts/update_seo.py` maintains the list. The latest confirmed discovery-quality workflow run for commit `41f4f672` succeeded, and the GitHub Pages deployment for that commit also succeeded. This verifies repository automation and deployment, **not** Google indexing, organic traffic growth, conversion growth or live-video availability. Further priority: measure actual acquisition and click-through, confirm index coverage, and improve useful content and distribution without spam or added cost.
 
+## 2026-11-15 GM course correction — acquisition outcomes first
+
+**President's direction:** ERN is a relaxing, visually engaging live Earth experience. Educational outreach, lesson-plan production and education-directory submissions are paused. The prior education prospect file is historical research only. Do not infer authorization for a new audience strategy from an instruction to continue executing.
+
+**Verified technical status:** GitHub discovery-quality checks and Pages deployment both completed successfully for `82c84972`. This establishes that the latest screensaver-guide change was built and deployed; it does **not** establish indexing, external placements or additional visitors.
+
+**Current evidence gaps:** This repository does not provide a verified GA4 acquisition report, Search Console click/impression export, or approved external listing URLs with observed referral visits. Real human visits gained from the recent commits therefore remain **unknown**, not zero and not positive.
+
+**Execution gate:** Prioritize genuine visits via live-video audiences, ambient/relaxation searches, browser display/screensaver intent, travel/city fans and suitable display publishers. Before further speculative page edits, obtain a baseline of GA4 sessions by source/medium and landing page, and Search Console clicks/impressions by page and country (last 7 vs preceding 7 days). Use the existing free measurement stack; no new paid integration. Separate *technical deployment*, *third-party placement*, and *observed visitors*. Never claim a traffic win from a GitHub commit alone. External submissions require platform eligibility, approved credentials and honest claims.
+
 ## Executive finding
 
 The current site is technically crawlable, but its acquisition surface is still extremely small. The main public site is essentially one indexable landing page, with one URL in the sitemap, no multilingual landing pages, no city-specific discovery pages, and only limited external distribution surfaces. That makes meaningful organic search growth unlikely even if the homepage itself is technically healthy.
