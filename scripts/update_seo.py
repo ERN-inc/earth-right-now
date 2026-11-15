@@ -13,7 +13,7 @@ SITEMAPS = [ROOT / "sitemap.xml", ROOT / "sitemap-ern.xml"]
 TEXT_SITEMAP = ROOT / "sitemap.txt"
 FEED = ROOT / "feed.xml"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
-DISCOVERY_URLS = [PAGE_URL, PAGE_URL + "embed-guide.html", PAGE_URL + "ja/", PAGE_URL + "es/", PAGE_URL + "id/", PAGE_URL + "guides/world-sunrise-sunset.html", PAGE_URL + "guides/earth-screensaver.html", PAGE_URL + "guides/why-sunrise-times-change.html", PAGE_URL + "guides/earth-visualization-vs-satellite.html", PAGE_URL + "cities/", PAGE_URL + "cities/tokyo.html", PAGE_URL + "cities/jakarta.html", PAGE_URL + "cities/singapore.html", PAGE_URL + "cities/seoul.html", PAGE_URL + "cities/sydney.html", PAGE_URL + "cities/mumbai.html", PAGE_URL + "cities/cape-town.html", PAGE_URL + "cities/reykjavik.html", PAGE_URL + "cities/london.html", PAGE_URL + "cities/new-york.html"]
+DISCOVERY_URLS = [PAGE_URL, PAGE_URL + "embed-guide.html", PAGE_URL + "ja/", PAGE_URL + "es/", PAGE_URL + "id/", PAGE_URL + "guides/world-sunrise-sunset.html", PAGE_URL + "guides/earth-screensaver.html", PAGE_URL + "guides/why-sunrise-times-change.html", PAGE_URL + "guides/earth-visualization-vs-satellite.html", PAGE_URL + "cities/", PAGE_URL + "cities/tokyo.html", PAGE_URL + "cities/jakarta.html", PAGE_URL + "cities/singapore.html", PAGE_URL + "cities/seoul.html", PAGE_URL + "cities/sydney.html", PAGE_URL + "cities/mumbai.html", PAGE_URL + "cities/cape-town.html", PAGE_URL + "cities/reykjavik.html", PAGE_URL + "cities/dubai.html", PAGE_URL + "cities/buenos-aires.html", PAGE_URL + "cities/london.html", PAGE_URL + "cities/new-york.html"]
 SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
 VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
 
