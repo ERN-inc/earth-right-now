@@ -13,7 +13,7 @@ SITEMAPS = [ROOT / "sitemap.xml", ROOT / "sitemap-ern.xml"]
 TEXT_SITEMAP = ROOT / "sitemap.txt"
 FEED = ROOT / "feed.xml"
 PAGE_URL = "https://ern-inc.github.io/earth-right-now/"
-DISCOVERY_URLS = [PAGE_URL, PAGE_URL + "embed-guide.html"]
+DISCOVERY_URLS = [PAGE_URL, PAGE_URL + "embed-guide.html", PAGE_URL + "ja/", PAGE_URL + "es/", PAGE_URL + "id/"]
 SCRIPT_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
 VIDEO_ID_RE = re.compile(r"[A-Za-z0-9_-]{11}\Z")
 
