@@ -24,6 +24,17 @@ class DiscoveryIntegrityTest(unittest.TestCase):
             html = path.read_text(encoding="utf-8")
             self.assertIn('<link rel="canonical" href="' + url + '">', html)
 
+    def test_live_intent_tracking_and_embed_fallback(self):
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        guide = (ROOT / "embed-guide.html").read_text(encoding="utf-8")
+        embed = (ROOT / "embed.html").read_text(encoding="utf-8")
+        self.assertEqual(home.count("gtag('event','live_view_intent'"), 3)
+        self.assertIn("gtag('event','copy_embed_code'", guide)
+        self.assertIn("gtag('event','copy_guide_link'", guide)
+        self.assertIn('id="offline"', embed)
+        self.assertIn('target="_blank" rel="noopener noreferrer"', embed)
+        self.assertNotIn('location.replace(channel)', embed)
+
     def test_sitemaps_include_every_discovery_page(self):
         for name in ("sitemap.xml", "sitemap-ern.xml"):
             root = ET.parse(ROOT / name).getroot()
