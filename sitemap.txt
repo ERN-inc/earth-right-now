@@ -11,5 +11,6 @@ https://ern-inc.github.io/earth-right-now/cities/
 https://ern-inc.github.io/earth-right-now/cities/tokyo.html
 https://ern-inc.github.io/earth-right-now/cities/jakarta.html
 https://ern-inc.github.io/earth-right-now/cities/singapore.html
+https://ern-inc.github.io/earth-right-now/cities/seoul.html
 https://ern-inc.github.io/earth-right-now/cities/london.html
 https://ern-inc.github.io/earth-right-now/cities/new-york.html
