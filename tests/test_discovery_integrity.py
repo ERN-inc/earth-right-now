@@ -1,5 +1,4 @@
 """Zero-network checks for the ERN discovery inventory and internal links."""
-import re
 from html.parser import HTMLParser
 import unittest
 from pathlib import Path
@@ -61,6 +60,23 @@ class DiscoveryIntegrityTest(unittest.TestCase):
                 if target.is_dir():
                     target /= "index.html"
                 self.assertTrue(target.is_file(), f"Broken link in {page}: {href}")
+
+
+    def test_language_hreflang_is_reciprocal(self):
+        """Each translated landing page must point to the same canonical language set."""
+        language_urls = {
+            "en": PAGE_URL,
+            "ja": PAGE_URL + "ja/",
+            "es": PAGE_URL + "es/",
+            "id": PAGE_URL + "id/",
+            "x-default": PAGE_URL,
+        }
+        for lang in ("en", "ja", "es", "id"):
+            page = ROOT / ("index.html" if lang == "en" else f"{lang}/index.html")
+            html = page.read_text(encoding="utf-8")
+            for code, target in language_urls.items():
+                self.assertIn(f'<link rel="alternate" hreflang="{code}" href="{target}">', html,
+                              f"Missing reciprocal {code} in {page}")
 
     def test_homepage_links_to_city_and_language_hubs(self):
         homepage = (ROOT / "index.html").read_text(encoding="utf-8")
