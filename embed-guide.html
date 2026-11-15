@@ -16,7 +16,7 @@
 <h2>Preview</h2><iframe src="./embed.html" title="Preview of the ERN live embed" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
 <h2>Share the embed guide</h2>
 <p>Know a teacher, publisher or community organizer who could use a live Earth view? Share these free instructions. Please share only with people who want them; unsolicited bulk outreach is not encouraged.</p>
-<p><a href="https://ern-inc.github.io/earth-right-now/embed-guide.html?utm_source=embed_guide&amp;utm_medium=share_link&amp;utm_campaign=publisher_outreach" id="share-embed-guide">Share this guide</a> · <a href="./cities/">Explore city daylight guides</a></p>
+<p><button type="button" id="copy-guide-link" aria-describedby="copy-guide-status" style="background:#69dbdc;color:#071522;border:0;border-radius:8px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer">Copy guide link</button> <span id="copy-guide-status" role="status" aria-live="polite"></span></p><p><a href="https://ern-inc.github.io/earth-right-now/embed-guide.html?utm_source=embed_guide&amp;utm_medium=share_link&amp;utm_campaign=publisher_outreach" id="share-embed-guide">Open shareable guide URL</a> · <a href="./cities/">Explore city daylight guides</a></p>
 <h2>Attribution and accessibility</h2>
 <p>Suggested attribution: <a href="https://ern-inc.github.io/earth-right-now/">EARTH RIGHT NOW — Live Earth</a>. Keep a descriptive iframe title and provide a direct link to the source for users who cannot access embedded video.</p>
 <h2>Where the live information comes from</h2>
@@ -26,6 +26,18 @@
 (function(){
   const button=document.getElementById('copy-embed');
   const status=document.getElementById('copy-embed-status');
+  const guideButton=document.getElementById('copy-guide-link');
+  const guideStatus=document.getElementById('copy-guide-status');
+  guideButton.addEventListener('click',async function(){
+    const shareUrl=document.getElementById('share-embed-guide').href;
+    try{
+      if(!navigator.clipboard || !window.isSecureContext)throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(shareUrl);
+      guideStatus.textContent='Guide link copied.';
+    }catch(error){
+      guideStatus.textContent='Copy unavailable. Use the shareable guide URL link below.';
+    }
+  });
   button.addEventListener('click',async function(){
     const snippet=document.querySelector('pre code').textContent;
     try{
