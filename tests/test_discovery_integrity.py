@@ -64,6 +64,36 @@ class DiscoveryIntegrityTest(unittest.TestCase):
                 self.assertTrue(target.is_file(), f"Broken link in {page}: {href}")
 
 
+
+    def test_discovery_pages_have_search_snippets(self):
+        """Keep each indexed page useful to search engines and screen readers."""
+        class MetadataCollector(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.title = False
+                self.description = False
+                self.language = False
+
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == "html" and attrs.get("lang"):
+                    self.language = True
+                if tag == "title":
+                    self.title = True
+                if tag == "meta" and attrs.get("name", "").lower() == "description" and attrs.get("content", "").strip():
+                    self.description = True
+
+        for url in DISCOVERY_URLS:
+            relative = url.removeprefix(PAGE_URL)
+            page = ROOT / relative
+            if not relative or relative.endswith("/"):
+                page /= "index.html"
+            metadata = MetadataCollector()
+            metadata.feed(page.read_text(encoding="utf-8"))
+            self.assertTrue(metadata.title, f"Missing title: {page}")
+            self.assertTrue(metadata.description, f"Missing meta description: {page}")
+            self.assertTrue(metadata.language, f"Missing document language: {page}")
+
     def test_language_hreflang_is_reciprocal(self):
         """Each translated landing page must point to the same canonical language set."""
         language_urls = {
