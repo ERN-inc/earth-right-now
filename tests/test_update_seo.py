@@ -48,7 +48,11 @@ class SeoSyncTest(unittest.TestCase):
                 self.assertNotIn(old, content)
                 self.assertIn(new, content)
                 self.assertIn(new, feed.read_text(encoding="utf-8"))
-                self.assertEqual(text_sitemap.read_text(encoding="utf-8"), update_seo.PAGE_URL + "\n")
+                self.assertEqual(text_sitemap.read_text(encoding="utf-8"), "".join(url + "\n" for url in update_seo.DISCOVERY_URLS))
+                for sitemap_path in sitemaps:
+                    sitemap_content = sitemap_path.read_text(encoding="utf-8")
+                    for discovery_url in update_seo.DISCOVERY_URLS:
+                        self.assertIn(discovery_url, sitemap_content)
                 self.assertEqual(update_seo.main(), 0)
                 self.assertEqual(content, page.read_text(encoding="utf-8"))
                 status.write_text(json.dumps({"status": "offline", "checkedAt": "2026-11-15T00:00:00Z"}),
