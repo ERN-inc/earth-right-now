@@ -1,0 +1,50 @@
+name: ERN discovery quality checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'embed-guide.html'
+      - 'ja/**'
+      - 'es/**'
+      - 'id/**'
+      - 'guides/**'
+      - 'cities/**'
+      - 'sitemap.xml'
+      - 'sitemap-ern.xml'
+      - 'sitemap.txt'
+      - 'scripts/update_seo.py'
+      - 'tests/**'
+      - '.github/workflows/discovery-quality.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'embed-guide.html'
+      - 'ja/**'
+      - 'es/**'
+      - 'id/**'
+      - 'guides/**'
+      - 'cities/**'
+      - 'sitemap.xml'
+      - 'sitemap-ern.xml'
+      - 'sitemap.txt'
+      - 'scripts/update_seo.py'
+      - 'tests/**'
+      - '.github/workflows/discovery-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discovery-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate SEO, canonical links, hreflang, sitemap and local navigation
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
