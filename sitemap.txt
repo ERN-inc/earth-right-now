@@ -1,2 +1,5 @@
 https://ern-inc.github.io/earth-right-now/
 https://ern-inc.github.io/earth-right-now/embed-guide.html
+https://ern-inc.github.io/earth-right-now/ja/
+https://ern-inc.github.io/earth-right-now/es/
+https://ern-inc.github.io/earth-right-now/id/
