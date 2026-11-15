@@ -65,6 +65,19 @@ class DiscoveryIntegrityTest(unittest.TestCase):
 
 
 
+
+    def test_sitemap_urls_match_canonical_without_trailing_index(self):
+        """Avoid splitting search signals between directory and index.html URLs."""
+        for url in DISCOVERY_URLS:
+            self.assertFalse(url.endswith("/index.html"), url)
+            relative = url.removeprefix(PAGE_URL)
+            page = ROOT / relative
+            if not relative or relative.endswith("/"):
+                page /= "index.html"
+            html = page.read_text(encoding="utf-8")
+            self.assertEqual(html.count('<link rel="canonical"'), 1,
+                             f"Expected one canonical in {page}")
+
     def test_discovery_pages_have_search_snippets(self):
         """Keep each indexed page useful to search engines and screen readers."""
         class MetadataCollector(HTMLParser):
