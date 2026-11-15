@@ -11,6 +11,7 @@
 <p>EARTH RIGHT NOW (ERN) presents a 24/7 live Earth experience with sunrise, sunset and city moments across 286 cities. Publishers, educators and community sites can add the live player without copying video files or maintaining a YouTube video ID.</p>
 <h2>Copy the responsive embed</h2>
 <pre><code>&lt;iframe src="https://ern-inc.github.io/earth-right-now/embed.html" title="EARTH RIGHT NOW live Earth stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0"&gt;&lt;/iframe&gt;</code></pre>
+<p><button type="button" id="copy-embed" aria-describedby="copy-embed-status" style="background:#69dbdc;color:#071522;border:0;border-radius:8px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer">Copy embed code</button> <span id="copy-embed-status" role="status" aria-live="polite"></span></p>
 <p>Use a container with a suitable width. The player reads ERN's public live status and selects the current YouTube broadcast. When no live stream is available, the embed redirects to ERN's YouTube live channel. Some browsers may restrict autoplay or embedded playback.</p>
 <h2>Preview</h2><iframe src="./embed.html" title="Preview of the ERN live embed" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
 <h2>Attribution and accessibility</h2>
@@ -18,4 +19,19 @@
 <h2>Where the live information comes from</h2>
 <p>The player uses <a href="./live.json">live.json</a> for the latest detected status. A live indicator is not a guarantee that the YouTube stream is currently reachable; verify the player on your own site.</p>
 <p><a href="./">Watch EARTH RIGHT NOW directly</a> · <a href="./feed.xml">RSS updates</a></p>
-</main><footer><small>Free embed instructions. Do not imply ERN endorsement of third-party sites.</small></footer></body></html>
+</main><script>
+(function(){
+  const button=document.getElementById('copy-embed');
+  const status=document.getElementById('copy-embed-status');
+  button.addEventListener('click',async function(){
+    const snippet=document.querySelector('pre code').textContent;
+    try{
+      if(!navigator.clipboard || !window.isSecureContext)throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(snippet);
+      status.textContent='Embed code copied.';
+    }catch(error){
+      status.textContent='Copy unavailable. Select the code above and copy it manually.';
+    }
+  });
+})();
+</script><footer><small>Free embed instructions. Do not imply ERN endorsement of third-party sites.</small></footer></body></html>
