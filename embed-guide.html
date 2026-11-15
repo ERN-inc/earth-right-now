@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1QC71HTSG7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1QC71HTSG7');</script>
 <title>Embed the Live Earth Stream | EARTH RIGHT NOW</title>
 <meta name="description" content="Add EARTH RIGHT NOW's live Earth view to a website with a responsive iframe. Free embed instructions, accessibility tips and live stream fallback details.">
 <link rel="canonical" href="https://ern-inc.github.io/earth-right-now/embed-guide.html">
@@ -34,6 +36,7 @@
       if(!navigator.clipboard || !window.isSecureContext)throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(shareUrl);
       guideStatus.textContent='Guide link copied.';
+      gtag('event','copy_guide_link',{event_category:'publisher_distribution'});
     }catch(error){
       guideStatus.textContent='Copy unavailable. Use the shareable guide URL link below.';
     }
@@ -44,6 +47,7 @@
       if(!navigator.clipboard || !window.isSecureContext)throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(snippet);
       status.textContent='Embed code copied.';
+      gtag('event','copy_embed_code',{event_category:'publisher_distribution'});
     }catch(error){
       const code=document.querySelector('pre code');
       const selection=window.getSelection();
