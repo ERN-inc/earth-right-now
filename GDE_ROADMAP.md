@@ -20,6 +20,14 @@ Goal: Build a zero-extra-cost, policy-compliant, fully automated global distribu
 ## Updated audience priority (2026-11-15, President direction)
 ERN is a relaxing, captivating, always-on Earth viewing experience first—not an education product. Prioritize genuine visits from (1) live-stream viewers, (2) ambient/relaxation and work-background audiences, (3) screensaver and visual display searches, (4) travel/city/landscape fans, and (5) hotels, cafes and display publishers. Educational directory outreach and classroom-resource production are paused. Existing accurate explanatory pages may remain for organic discovery, but do not prioritize educational pitching. The previously researched education prospects are archived research only, not an active outreach queue. Optimize actual website referrals and repeat human visits, not commits or speculative impressions.
 
+## Accelerated execution protocol (President direction, 2026-11-16)
+- **Operating mode:** While the President is actively messaging in chat, execute safe, approved GDE work immediately in that turn instead of only acknowledging. The 08:00 and 20:00 Asia/Tokyo scheduled runs cover periods without an active exchange; they are not a reason to defer interactive work. Presence cannot be inferred from whether the app is open.
+- **Critical path:** Target resolution of P0 RSS/Actions/Pages/measurement blockers within 48 hours, and EARTH BREAK organic social creative, UTM links and referral-ready assets within 72 hours. These are targets, not unverified completion claims.
+- **Parallelization:** Run independent SEO, multilingual, city discovery, technical reliability and creative-preparation workstreams concurrently when safe; never wait for an arbitrary later roadmap phase if a task is ready now. Preserve quality and rollback.
+- **Approved brand positioning:** EARTH BREAK means a casual, relaxing moment to watch Earth; avoid exaggerated decoration or educational framing. The first destination remains the official ERN website. Product Hunt is already listed.
+- **Publishing gate:** External social publication, new channels and campaign launches remain subject to the existing President approval rules. Draft preparation is allowed; posting is not implied.
+- **Every execution:** Reconcile latest GitHub state to prevent duplicate commits; prioritize demonstrable acquisition outcomes over document churn. Report blocked work, next critical dependency, actual verification, and elapsed-time savings only when supported by evidence.
+
 ## Phase 1 — Distribution foundation (2026-11-14 to 2026-11-17)
 - Keep live YouTube ID detection and SEO metadata synchronized.
 - Keep sitemap variants and RSS feed synchronized.
