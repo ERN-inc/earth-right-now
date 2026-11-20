@@ -53,5 +53,13 @@ jobs:
               feed=Path('/tmp/feed.xml').read_text()
               assert vid in html, 'homepage contains stale live video reference'
               assert vid in feed, 'RSS feed contains stale live video reference'
-          print('Live metadata is consistent across live.json, homepage and feed.')
+          from datetime import datetime, timezone
+          from xml.etree import ElementTree as ET
+          now=datetime.now(timezone.utc)
+          checked=live.get('checkedAt')
+          assert checked, 'live.json missing checkedAt'
+          age=(now-datetime.fromisoformat(checked.replace('Z','+00:00'))).total_seconds()
+          assert 0 <= age <= 10800, f'live detector stale: {age/3600:.1f} hours since last check'
+          ET.fromstring(feed)
+          print('Live status is fresh; metadata and RSS parse successfully.')
           PY
