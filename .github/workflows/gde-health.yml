@@ -46,11 +46,11 @@ jobs:
           import json
           from pathlib import Path
           live=json.loads(Path('/tmp/live.json').read_text())
+          feed=Path('/tmp/feed.xml').read_text()
           if live.get('status')=='live':
               vid=live.get('videoId','')
               assert len(vid)==11, 'invalid live video id'
               html=Path('/tmp/index.html').read_text()
-              feed=Path('/tmp/feed.xml').read_text()
               assert vid in html, 'homepage contains stale live video reference'
               assert vid in feed, 'RSS feed contains stale live video reference'
           from datetime import datetime, timezone
