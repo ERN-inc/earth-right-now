@@ -1,5 +1,7 @@
 {
-  "status": "offline",
-  "videoId": null,
-  "checkedAt": "2026-11-17T09:38:53Z"
+  "status": "live",
+  "videoId": "xrYBoAiEnRc",
+  "checkedAt": "2026-11-21T00:00:00Z",
+  "source": "owner-provided-live-url",
+  "note": "Owner confirmed stream active; independent status not verified"
 }
