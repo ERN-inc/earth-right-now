@@ -59,6 +59,9 @@ const visitLink=document.getElementById('visit-live-link');
 const channelUrl='https://www.youtube.com/@earth_right_now/live';
 let activeId=defaultId;
 function setVideo(id){
+  iframe.style.display='block';
+  const notice=document.getElementById('ern-offline-notice');
+  if(notice)notice.style.display='none';
   const url='https://www.youtube.com/watch?v='+id;
   if(activeId!==id){
     iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0';
@@ -69,9 +72,20 @@ function setVideo(id){
 }
 function setOffline(){
   if(activeId!==null){
-    iframe.src='about:blank';
+    iframe.removeAttribute('src');
     activeId=null;
   }
+  iframe.style.display='none';
+  let notice=document.getElementById('ern-offline-notice');
+  if(!notice){
+    notice=document.createElement('div');
+    notice.id='ern-offline-notice';
+    notice.setAttribute('role','status');
+    notice.style.cssText='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(145deg,#102c45,#061522);color:#eef7ff;gap:12px';
+    notice.innerHTML='<strong style="font-size:clamp(20px,3vw,32px)">🌍 EARTH RIGHT NOW</strong><span>Live playback is currently unavailable.</span><a href="https://www.youtube.com/@earth_right_now/live" target="_blank" rel="noopener noreferrer" style="color:#69dbdc">Check the current stream on YouTube</a>';
+    document.getElementById('player').appendChild(notice);
+  }
+  notice.style.display='flex';
   youtubeLink.href=channelUrl;
   visitLink.href=channelUrl;
 }
