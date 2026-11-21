@@ -70,15 +70,13 @@ def legacy_lookup():
         result = None
     if result is None or result.returncode != 0:
         error = result.stderr.lower() if result is not None else ''
-        if 'the channel is not currently live' in error:
-            info = {'live_status': 'not_live'}
-            print('Channel is offline; recording offline status')
-        else:
-            print('Primary lookup blocked; trying public channel page', file=sys.stderr)
-            info = fallback_live_page()
-            if info is None:
-                print('Unverified state; retaining previous status')
-                return 0
+        # A yt-dlp error is not authoritative proof that a channel is offline.
+        # Preserve the last verified stream instead of blanking public embeds.
+        print('Primary lookup failed; checking public channel page', file=sys.stderr)
+        info = fallback_live_page()
+        if info is None:
+            print('Live state unverified; retaining previous status')
+            return 0
     else:
         try:
             info = json.loads(result.stdout)
