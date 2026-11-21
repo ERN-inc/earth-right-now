@@ -7,6 +7,7 @@ on:
       - 'scripts/check_live.py'
       - 'scripts/update_seo.py'
       - 'tests/test_update_seo.py'
+      - 'tests/test_check_live.py'
       - '.github/workflows/update-live.yml'
   schedule:
     - cron: '*/20 * * * *'
