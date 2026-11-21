@@ -1,0 +1,86 @@
+name: ERN GDE live distribution watchdog
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/live-watchdog.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Audit detector execution and public distribution
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import json, os, re, sys, urllib.request
+          from datetime import datetime, timezone
+
+          repo = os.environ["GH_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          base = "https://ern-inc.github.io/earth-right-now/"
+          failures = []
+
+          def fetch(url, authenticated=False):
+              headers = {"User-Agent": "ERN-GDE-watchdog/1.0"}
+              if authenticated:
+                  headers["Authorization"] = "Bearer " + token
+                  headers["Accept"] = "application/vnd.github+json"
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  return response.read().decode("utf-8")
+
+          try:
+              api = "https://api.github.com/repos/" + repo + "/actions/workflows/update-live.yml/runs?per_page=10"
+              runs = json.loads(fetch(api, True)).get("workflow_runs", [])
+              now = datetime.now(timezone.utc)
+              successful = [r for r in runs if r.get("conclusion") == "success"]
+              if not successful:
+                  failures.append("No successful detector workflow among 10 latest runs")
+              else:
+                  last = max(successful, key=lambda r: r["created_at"])
+                  timestamp = datetime.fromisoformat(last["created_at"].replace("Z", "+00:00"))
+                  age = (now - timestamp).total_seconds() / 60
+                  print(f"Latest successful detector run: {last['created_at']} ({age:.0f} min ago)")
+                  if age > 90:
+                      failures.append(f"Detector workflow stale: {age:.0f} minutes since last successful run")
+              if runs and runs[0].get("conclusion") == "failure":
+                  failures.append("Most recent detector run failed")
+          except Exception as exc:
+              failures.append(f"Could not verify detector workflow: {exc}")
+
+          try:
+              status = json.loads(fetch(base + "live.json"))
+              html = fetch(base)
+              feed = fetch(base + "feed.xml")
+              video_id = status.get("videoId")
+              if status.get("status") == "live":
+                  if not isinstance(video_id, str) or not re.fullmatch(r"[A-Za-z0-9_-]{11}", video_id):
+                      failures.append("Public live.json contains invalid video ID")
+                  else:
+                      if video_id not in html:
+                          failures.append("Public homepage does not reference current live ID")
+                      if "ern-live-" + video_id not in feed:
+                          failures.append("Public RSS does not reference current live ID")
+              elif status.get("status") != "offline":
+                  failures.append("Public live.json has unknown status")
+              print("Public distribution status:", status.get("status"), video_id)
+          except Exception as exc:
+              failures.append(f"Public site audit failed: {exc}")
+
+          if failures:
+              for failure in failures:
+                  print("::error::" + failure)
+              sys.exit(1)
+          print("ERN GDE watchdog passed")
+          PY
