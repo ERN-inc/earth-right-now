@@ -28,6 +28,23 @@ ERN is a relaxing, captivating, always-on Earth viewing experience first—not a
 - **Publishing gate:** External social publication, new channels and campaign launches remain subject to the existing President approval rules. Draft preparation is allowed; posting is not implied.
 - **Every execution:** Reconcile latest GitHub state to prevent duplicate commits; prioritize demonstrable acquisition outcomes over document churn. Report blocked work, next critical dependency, actual verification, and elapsed-time savings only when supported by evidence.
 
+## Priority acquisition experiment — EARTH BREAK short-form discovery (2026-11-22)
+
+**Strategic hypothesis, not a proven outcome:** ERN's strongest zero-extra-cost growth path is a repeatable, genuinely distinctive 10–30 second clip of actual ERN sunrise/sunset/day-night/city moments, linked to the official ERN website. Use the existing YouTube and Pinterest presences first; adding a new channel or launching an external campaign still requires specific approval under the President-approved change control.
+
+**Why:** Existing Pinterest board has one Pin and a screenshot showed 12 impressions, 7 Pin interactions, and zero saves; those 7 are not necessarily outbound website clicks. Pinterest's own guidance says original high-quality images/videos, fresh weekly publication, relevant destinations and titles, and distinct creative variants matter; duplicate posting risks spam flags. YouTube has expanded Shorts-from-clips tooling for eligible long-form content, but feature eligibility for ERN must be verified. Search visibility depends on helpful original content, not mass-produced thin pages.
+
+**Execution sequence (do not substitute document commits for delivery):**
+1. Verify public website, existing live stream, and access to actual ERN-owned footage before preparing clips. Never invent footage or represent visualization as satellite camera footage.
+2. Produce 3 distinct, source-verified vertical clips (10–30 seconds): (a) sunrise crossing Earth, (b) nightfall, (c) 286-city moment. Caption simply, with EARTH BREAK tone. Source footage and commercial rights must be verified.
+3. Use official-site-first tracked destination URL for Pinterest: `https://ern-inc.github.io/earth-right-now/?utm_source=pinterest&utm_medium=organic_social&utm_campaign=earth_break`. For YouTube, respect platform link capabilities; use the official site in profile/description where permitted. Avoid promises of clickable Shorts links.
+4. On the existing approved channels, obtain publication approval for the exact clips and scheduling if needed; do not assume this document authorizes a new campaign or connected-account access.
+5. Track separately: Pinterest impressions, saves, **outbound clicks**, GA4 sessions by UTM source, Google Search Console clicks and impressions, and returning visitors. The 7 interactions shown in screenshot are not proof of 7 site visits.
+6. Compare 3 creative concepts after a defined initial observation period (e.g. 7 days), then scale the winner with **new original footage**, not duplicate reposts. Stop low-value tactics.
+7. Separately, maintain the existing voluntary embed program, but do not divert the main growth effort into researching tiny directories.
+
+**P0 blockers:** confirmed access to source clip footage; channel publication credentials/connection; real GA4/Search Console acquisition data. Status as of 2026-11-22: strategy selected, no new clip published or traffic lift verified by this roadmap entry.
+
 ## Phase 1 — Distribution foundation (2026-11-14 to 2026-11-17)
 - Keep live YouTube ID detection and SEO metadata synchronized.
 - Keep sitemap variants and RSS feed synchronized.
