@@ -1,5 +1,26 @@
 # ERN publisher prospects — researched 2026-11-22
 
+## Priority pivot: ambient-first, not travel-brand outreach (2026-11-22)
+
+**Priority 1 — Tiny Worlds**: https://tinyworlds.karmakode.co/submit
+- Editorial fit: curated calm browser experiences, ambient spaces and slow, relaxing websites. Their guidelines say listings link **directly to the creator's official website**, rather than embedding or reframing it: https://tinyworlds.karmakode.co/creator-guidelines
+- Submission form fields: title, official website, creator, description, tags; email optional. No account required. Human review; **no acceptance or traffic promised**.
+- Ready-to-enter submission (not submitted):
+  - Title: EARTH RIGHT NOW — Take an Earth Break
+  - Official website: https://ern-inc.github.io/earth-right-now/?utm_source=tinyworlds&utm_medium=directory&utm_campaign=earth_break
+  - Creator: EARTH RIGHT NOW (ERN)
+  - Description: Take a quiet break and watch the Earth turn. EARTH RIGHT NOW is a free browser-based Earth visualization with sunrise, sunset and city moments from around the world. Open it full-screen for a calming backdrop. This is a visualization, not a live satellite camera.
+  - Tags: ambient, relaxing, earth, screensaver, focus
+  - Email: optional; use only an authorized ERN contact address.
+- **Status: researched, submission text prepared; NOT submitted.** Form interaction unavailable in this workflow. User can submit at the above URL; alternatively use a browser-enabled workflow.
+
+**Deprioritized**: travel-brand outreach and camera-only directories. ERN is a visualization, not a location-specific physical webcam. Do not misrepresent it as one to obtain listings.
+
+**Next verification**: Record the live directory listing URL if approved; compare GA4 sessions for `utm_source=tinyworlds` with baseline; no listing or referral claim before evidence.
+
+---
+
+
 Goal: real human referrals to https://ern-inc.github.io/earth-right-now/ through voluntary editorial coverage or embedding. **Research only; no outreach or publication authorized or performed.** No paid placement, mass email, guest-post link schemes, or invented partnerships.
 
 ## First-pass prospects (official published submission/contact pages)
